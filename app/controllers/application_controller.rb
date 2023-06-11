@@ -5,8 +5,8 @@ class ApplicationController < ActionController::API
   protected
 
   def configure_permitted_parameters
-    logger.info "ApplicationController with devise request."
-    logger.info "...params: #{params.inspect}"
+    #logger.info "ApplicationController with devise request."
+    #logger.info "...params: #{params.inspect}"
 
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[user_id email last_name nick_name])
 

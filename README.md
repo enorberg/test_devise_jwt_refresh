@@ -60,6 +60,7 @@ Steps for setup:
             - specify the devise-jwt secret key
             - declare login & logout route
             - define JWT expiration period.  (e.g. 30 minutes in this example)
+              NOTE: changed timeout to 60 minutes.:w
 
        -- Token revokation - use JTIMatcher.  (JWT Id : JTI in token must match JTI col in db)
          Add JTI column to Users model.
@@ -87,6 +88,7 @@ Steps for setup:
               registrations_controller.rb before respond_to :json
 
 Test initial setup with Postman:
+  (see ./Test_with_Postman  for a .json file of exported tests)
   -- Add User.   Note: to set the Content-Type header, use the JSON drop down in Body.
      POST http://localhost:3001/signup
      { "user": { "nick_name": "Fred", "email": "ff2@gmail.com", "password": "fghijk" } }
@@ -142,8 +144,6 @@ Issues:
       See this posting: https://github.com/waiting-for-dev/devise-jwt/issues/7 for 
           refresh discussion.
 
-      See ChatGPT dialog - screenshots at /PrecisePlay/doc/JwtRefreshPerChatGPT
-
       Note: Currently the phone app sends   , 'PATCH relays/refresh'
             with: authroization hdr = "Bearer jwt_rrt"  ... and .., 
             popps_body = JSON.stringify({device_guid: dvc_id})
@@ -152,7 +152,55 @@ Issues:
             With valid jwt_uat in Auth hdr and Body: {device_guid, device_description}
 
       Note: Content of jwt_rrt is
-            internally constructed  JSON Strinified form of
+            internally constructed  JSON Stringified form of
              {userid: user_id, device_guid: device_guid}
+
+      REVIEW OF DEVISE / WARDEN SOURCE .....
+      Found that - app/controllers/users/sessions_controller.rb inherits
+                   from Devise::SessionsController.
+                 - sign_in is processed at Devise::SessionsController::create()
+                 - "intercept" create() in app/contollers/users/sessions_controller.rb
+                 - check for jwt_rrt in body JSON.
+                 - if absent, then "super" to create() in Devise for pwd login...
+                 - otherwise, reproduce the Devise::SessionsController logic to:
+                   - validate jwt_rrt - decrypt, check device_ids, get user_id.
+                   - retrieve User
+                   - check that user_relay_registrations tbl entry exists
+                   - call sign_in() and respond_with() function to complete login.
+
+      Tested with Postman using non-encrypted mock jwt_rrt and skipping the
+      user_relay_registrations lookup/check.   ==> Seems to work!!!!!
+
+      NEXT:
+      - Clean up routing to user_relay_registrations.
+        Note: USEFUL - in a controller, after "before_action :authenticate_user!"
+              a "current_user" variable is available.
+      - Research JWT Encryption for jwt_rrt.
+      - Test POST user_relay_registration  => return jwt_rrt.
+        Note: disallow duplicates.
+      - Test lookup check in session_controller.rb create() processing.
+      - Test DELETE user_relay_registration.
+
+      Generate controllers:
+      rails g controller api/v1/user_controller
+      rails g controller api/v1/user_relay_registration_controller
+
+      Generate models: (note: User model already exists)
+      rails g model user_relay_registration --no-migration   ..already created this...
+
+      rrt_jwt format: 
+        var claims = {
+                iss: CONFIG.POPPS_APP,   ... currently this is "https://popps.com"  ??
+                sub: lcl_rrt_sub_encrypt(userid, deviceid),
+                popps_type: "rrt"
+        }
+      ...encrypted sub is  JSON.stringify({user_id: user_id, device_guid: device_guid});
+
+      Need a "Service Object" to handle JWT & Enctryption tasks.
+      - For secret use: Rails.application.credentials.devise_jwt_secret_key!
+      - Use JWT gem - see https://www.rubydoc.info/gems/jwt/1.5.4
+      - Encrypt/decrypt example: 
+        https://dev.to/shobhitic/simple-string-encryption-in-rails-36pi
+
 
 

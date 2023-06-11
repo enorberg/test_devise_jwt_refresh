@@ -197,6 +197,7 @@ DEPENDENCIES
   devise
   devise-jwt
   jsonapi-serializer
+  jwt
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.4, >= 7.0.4.3)

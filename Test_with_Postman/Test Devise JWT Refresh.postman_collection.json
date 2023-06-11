@@ -1,0 +1,425 @@
+{
+	"info": {
+		"_postman_id": "43f87b56-faeb-4a7a-93ae-c4836b209802",
+		"name": "Test Devise JWT Refresh",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27061776"
+	},
+	"item": [
+		{
+			"name": "SignUp Min Fields",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n    \"user\": {\n      \"nick_name\": \"Fred\",\n      \"email\": \"ff2@gmail.com\",\n      \"password\": \"fghijk\"\n    }\n}\n ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SignUp All Fields",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": {\n    \"user_id\": \"js\",\n    \"nick_name\": \"Johnny\",\n    \"last_name\": \"Smith\",\n    \"first_name\": \"John\",\n    \"email\": \"js0@gmail.com\",\n    \"cell_number\": \"123-456-7890\",\n    \"password\": \"js0000\",\n    \"vfy_passwd\": \"js0000\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n    \"user\": { \n        \"user_id\": \"js\",\n        \"email\": \"js0@gmail.com\", \n        \"password\": \"js0000\" \n    } \n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Log out",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzNDE3NjJhNi0xN2JkLTRmZTUtYWE3My0zY2FhYzEwNmZjYTUiLCJzdWIiOiIzIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjg1MDYxMzE3LCJleHAiOjE2ODUwNjMxMTd9.Bq5zrAVrgmjV7ekQuvsIcQ1L8JNRXWxZA3_9j48VnqU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User data",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkYjYxZTQ2MS1mOWQ0LTRlNDMtYTk5ZS0xZGMzZTE2ZWMzNTEiLCJzdWIiOiIzIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjg1NjU1Mzc2LCJleHAiOjE2ODU2NTcxNzZ9.KoXEEmAUwR6D10SvOBclVDnVqJZ34DXLkWhzRIU5-8Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/v1/users/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login-1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": {\n    \"user_id\": \"js1\",\n    \"password\": \"js1111\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login-2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": {\n    \"user_id\": \"js1\",\n    \"relay_id\": \"xxx_device_guid_xxx\",\n    \"jwt_rrt\":  \"eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3BvcHBzLmNvbSIsInN1YiI6IjRkNTU5YWQ4MDhkMTY3NGFmNWM2ODQ1NjMwNDZhY2M1OGI2OTk1MmI2NDg3Y2FhNGQxYTE2NTA1MjZkYzE5NzkkJGFPTEdPOFMwTmltWnh4cSsybVFnTEEyNllRMDFxRnNsL0pPWVJqSUQxRDNpNGo3ZjhBWndKUmlyS1JoUGJ1Tnpab0ZsZ29rYVlaeU9FdEwrdUViZ2lBPT0tLTFsbzdHMGF2VWtyMFpTK1UtLVpqZFI4MFZUb3NDN0VkOGM3UEVzbmc9PSIsInBvcHBzX3R5cGUiOiJycnQifQ.EXsUtyaYtbIkQGze6HbNQybzhOWzuGzrHHuYyTYCDu4\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Login-2",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": {\n    \"user_id\": \"js1\",\n    \"relay_id\": \"xxx_device_guid_xxx\",\n    \"jwt_rrt\":  \"eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwcy8vcG9wcHMuY29tIiwic3ViIjoiMmZlYTg1NzVmNTgyMDg1ODhhNTBhNDVlMmI4ODYwNTM4ODRmNzU1MDE1NjgzOGUyYWViMmIzNmY3YTBmYjM0OCQkbktlY1BWMW9yQlpYNFlUVytEUDZxOGRTWU45Nmp1RjllT1dBWkdrRzhvdkVsYThmWENJV2hkUlkzMVNKTkpMOGNCdG1ZTTViMExpU3c3V1RSTXByRVE9PS0tZDhtbnl5SFMyNUNtaFgxNi0tSWRrUGZYMWVpSnVQQVlOK3RMa1BVdz09IiwicG9wcHNfdHlwZSI6InJydCJ9.ameqGMofqMnmm9-Gc2DaYpyojxnEHYE8dkPNVDUxdsc\",\n    \"password\": \"js1111\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkYjYxZTQ2MS1mOWQ0LTRlNDMtYTk5ZS0xZGMzZTE2ZWMzNTEiLCJzdWIiOiIzIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjg2NDM2NDY5LCJleHAiOjE2ODY0MzgyNjl9.4xIF2iAaimKiOoVfte8oYLPE_DwlvRisb1nUizLQ-oU"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"a876b93b7e5101a2da7fd08abc070925\""
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "a70d8494-8200-4e97-ac9f-dc2f5bde950d"
+						},
+						{
+							"key": "X-Runtime",
+							"value": "0.121312"
+						},
+						{
+							"key": "Server-Timing",
+							"value": "start_processing.action_controller;dur=0.14, sql.active_record;dur=1.99, instantiation.active_record;dur=4.90, process_action.action_controller;dur=46.78"
+						},
+						{
+							"key": "vary",
+							"value": "Accept, Origin"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": {\n        \"code\": 200,\n        \"message\": \"Login  successfull.\",\n        \"data\": {\n            \"user\": {\n                \"user_id\": \"js1\",\n                \"email\": \"js@gmail.com\",\n                \"last_name\": \"Smith1\",\n                \"nick_name\": \"Johnny1\"\n            }\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get UserRelayRegistration",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkYjYxZTQ2MS1mOWQ0LTRlNDMtYTk5ZS0xZGMzZTE2ZWMzNTEiLCJzdWIiOiIzIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjg1ODQxMTgyLCJleHAiOjE2ODU4NDI5ODJ9.4T1lzCtgquyryZ9dI8VvDl-99bEtoc7Y8I8Y-H03Kfs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/v1/user_relay_registrations/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"v1",
+						"user_relay_registrations",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create UserRelayRegistration",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkYjYxZTQ2MS1mOWQ0LTRlNDMtYTk5ZS0xZGMzZTE2ZWMzNTEiLCJzdWIiOiIzIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjg2NTA5NjE2LCJleHAiOjE2ODY1MTE0MTZ9.cePorLV9LTm_dDqanng6Mwu6RHEcqGAYn41nRkj8y-Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"user_relay_registration\": {\n    \"user_id\": \"js1\",\n    \"device_guid\": \"xxx_device_guid_xxx\",\n    \"device_description\": \"Test relay device\",\n    \"usage_count\": 0\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/v1/user_relay_registrations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"v1",
+						"user_relay_registrations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete UserRelayRegistration",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkYjYxZTQ2MS1mOWQ0LTRlNDMtYTk5ZS0xZGMzZTE2ZWMzNTEiLCJzdWIiOiIzIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjg2NTA5NjE2LCJleHAiOjE2ODY1MTE0MTZ9.cePorLV9LTm_dDqanng6Mwu6RHEcqGAYn41nRkj8y-Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/v1/user_relay_registrations/17",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"v1",
+						"user_relay_registrations",
+						"17"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

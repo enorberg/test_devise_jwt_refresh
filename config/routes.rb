@@ -13,4 +13,10 @@ Rails.application.routes.draw do
       registrations: 'users/registrations'
     }
 
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :user_relay_registrations, only: [ :index, :show, :update, :create, :destroy ]
+      resources :users, only: [ :index, :show, :update, :create, :destroy ]
+    end
+  end
 end
