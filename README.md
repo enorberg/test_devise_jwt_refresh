@@ -188,7 +188,7 @@ Issues:
       Generate models: (note: User model already exists)
       rails g model user_relay_registration --no-migration   ..already created this...
 
-      rrt_jwt format: 
+      From previous NodeJS project, rrt_jwt format: 
         var claims = {
                 iss: CONFIG.POPPS_APP,   ... currently this is "https://popps.com"  ??
                 sub: lcl_rrt_sub_encrypt(userid, deviceid),
@@ -196,11 +196,14 @@ Issues:
         }
       ...encrypted sub is  JSON.stringify({user_id: user_id, device_guid: device_guid});
 
-      Need a "Service Object" to handle JWT & Enctryption tasks.
-      - For secret use: Rails.application.credentials.devise_jwt_secret_key!
+      Need  custom logic to handle JWT & Enctryption tasks.
+      - For secret use: Rails.application.secrets.secret_key_base.
       - Use JWT gem - see https://www.rubydoc.info/gems/jwt/1.5.4
       - Encrypt/decrypt example: 
         https://dev.to/shobhitic/simple-string-encryption-in-rails-36pi
+      ==> see private functions:
+          UserRelayRegistrationsController::new_rrt_jwt(id, guid)
+          SessionsController::check_rrt_jwt(rrt_token)
 
 
 
