@@ -1,5 +1,10 @@
 # README - Test Devise Jwt Refresh 
 
+NOTE: Security issue - normally the ./config/master.key  file is omitted from the .git repo.
+      In this "DEMO" project, it has been added to the repo as ./config/master.key.bak 
+      To run examples, first copy ./config.master.key.bak to ./config/master.key
+      Normally access to this file would be provided through a project specific channel.
+
 Use devise and devise-jwt gems - see: 
   https://sdrmike.medium.com/rails-7-api-only-app-with-devise-and-jwt-for-authentication-1397211fb97c
 
